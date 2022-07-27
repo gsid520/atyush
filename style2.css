@@ -1,0 +1,37 @@
+body {
+  font-size: 1.5rem;
+  background-color: wheat;
+}
+
+#header {
+  text-align: center;
+  font-size: 3rem !important;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+#form {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+}
+form {
+  width: 70%;
+  height: 50%;
+  border-bottom: 1px solid black;
+  border-radius: 2px;
+  box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%),
+    0 1px 5px 0 rgb(0 0 0 / 20%);
+  padding: 20px;
+  overflow-y: scroll;
+}
+#emailHelp {
+  font-size: 0.9rem;
+}
+.form-group {
+  margin-top: 16px;
+}
+button {
+  margin-top: 16px;
+  width: 80px;
+}

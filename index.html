@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style2.css" />
+  </head>
+  <body>
+    <div id="container">
+      <div id="header">
+        <h3><b> ELECTRICITY PAYMENT</b></h3>
+        <img src="image/logo.jpg" alt="" />
+      </div>
+
+      <div id="form">
+        <form action="./index3.html" onsubmit="saveFile()">
+          <div class="form-group">
+            <label for="exampleInputEmail1">Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="exampleInputName"
+              aria-describedby="emailHelp"
+              placeholder="Enter FullName"
+              required
+            />
+            <small id="emailHelp" class="form-text text-muted"
+              >We'll never share your email with anyone else.</small
+            >
+          </div>
+          <div class="form-group">
+            <label for="exampleInputMobile">Mobile Number</label>
+            <input
+              type="tel"
+              class="form-control"
+              id="exampleInputMobile"
+              placeholder="Mobile Number"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="exampleInputconsumer">Consumer Number</label>
+            <input
+              type="tel"
+              class="form-control"
+              id="exampleInputconsumer"
+              placeholder="Consumer Number"
+              required
+            />
+          </div>
+
+          <button type="submit" class="btn btn-primary">Pay</button>
+        </form>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      let saveFile = () => {
+        // Get the data from each element on the form.
+        const name = document.getElementById("exampleInputName");
+        const mobile = document.getElementById("exampleInputMobile");
+        const consumer = document.getElementById("exampleInputconsumer");
+
+        // This variable stores all the data.
+        let data =
+          "\r Name: " +
+          name.value +
+          " \r\n " +
+          "mobile: " +
+          mobile.value +
+          " \r\n " +
+          "consumer: " +
+          consumer.value;
+
+        // Convert the text to BLOB.
+        const textToBLOB = new Blob([data], { type: "text/plain" });
+        const sFileName = "formData.txt"; // The file to save the data.
+
+        let newLink = document.createElement("a");
+        newLink.download = sFileName;
+
+        if (window.webkitURL != null) {
+          newLink.href = window.webkitURL.createObjectURL(textToBLOB);
+        } else {
+          newLink.href = window.URL.createObjectURL(textToBLOB);
+          newLink.style.display = "none";
+          document.body.appendChild(newLink);
+        }
+
+        newLink.click();
+      };
+    </script>
+  </body>
+</html>
