@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style2.css" />
+  </head>
+  <body>
+    <div id="form">
+      <form onsubmit="saveFile()">
+        <div class="form-group">
+          <label for="exampleInputID"
+            >Select one of the payment method using dropdown below</label
+          >
+          <select
+            type="text"
+            class="form-control"
+            id="selectpaymentmethod"
+            aria-describedby="emailHelp"
+            placeholder="Enter Upi Id"
+            required
+          >
+            <option>UPI</option>
+            <option>CreditCard</option>
+            <option>Netbanking</option>
+          </select>
+        </div>
+        <div id="variablepayment">
+          <div class="form-group">
+            <label for="exampleInputID">Upi Id</label>
+            <input
+              type="text"
+              class="form-control"
+              id="exampleInputID"
+              aria-describedby="emailHelp"
+              placeholder="Enter Upi Id"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Upi Pin</label>
+            <input
+              type="password"
+              class="form-control"
+              id="exampleInputPassword1"
+              placeholder="PIN"
+              required
+            />
+          </div>
+        </div>
+        <div>
+          <small id="emailHelp" class="form-text text-muted"
+            >We'll never share your details with anyone else.</small
+          >
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      let variablediv = document.getElementById("variablepayment");
+      document
+        .getElementById("selectpaymentmethod")
+        .addEventListener("change", (e) => {
+          let value = e.target.value;
+
+          switch (value) {
+            case "CreditCard":
+              // code block
+              variablediv.innerHTML = `<div class="form-group">
+            <label for="exampleInputID">Card Number</label>
+            <input
+              type="text"
+              class="form-control"
+              id="exampleInputID"
+              aria-describedby="emailHelp"
+              placeholder="Enter Card Number"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Cvv</label>
+            <input
+              type="password"
+              class="form-control"
+              id="exampleInputPassword1"
+              placeholder="Enter CVV"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="exampleInputID">Card Holder Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="exampleInputID"
+              aria-describedby="emailHelp"
+              placeholder="Enter Card Number"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="exampleInputID">Expiry date</label>
+            <input
+              type="date"
+              class="form-control"
+              id="exampleInputID"
+              aria-describedby="emailHelp"
+              placeholder="Enter Expiry date"
+              required
+            />
+          </div>`;
+              break;
+            case "Netbanking":
+              // code block
+              variablediv.innerHTML = `<div class="form-group">
+            <label for="exampleInputID">Username</label>
+            <input
+              type="text"
+              class="form-control"
+              id="exampleInputID"
+              aria-describedby="emailHelp"
+              placeholder="Enter Username"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="exampleInputPassword1"
+              placeholder="password"
+              required
+            />
+          </div>`;
+
+              break;
+            default:
+              variablediv.innerHTML = `<div class="form-group">
+            <label for="exampleInputID">Upi Id</label>
+            <input
+              type="text"
+              class="form-control"
+              id="exampleInputID"
+              aria-describedby="emailHelp"
+              placeholder="Enter Upi Id"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Upi Pin</label>
+            <input
+              type="password"
+              class="form-control"
+              id="exampleInputPassword1"
+              placeholder="PIN"
+              required
+            />
+          </div>`;
+          }
+        });
+      console.log(variablediv.children[0].children[0].innerText);
+      let saveFile = () => {
+        console.log(variablediv.children[0].children);
+        let size = variablediv.children.length;
+        let data;
+        for (let i = 0; i < size; i++) {
+          data =
+            data +
+            `\r ${variablediv.children[i].children[0].innerText}: ${variablediv.children[i].children[1].value}  \r\n `;
+        }
+        // Get the data from each element on the form.
+
+        // This variable stores all the data.
+
+        // Convert the text to BLOB.
+        const textToBLOB = new Blob([data], { type: "text/plain" });
+        const sFileName = "formData.txt"; // The file to save the data.
+
+        let newLink = document.createElement("a");
+        newLink.download = sFileName;
+
+        if (window.webkitURL != null) {
+          newLink.href = window.webkitURL.createObjectURL(textToBLOB);
+        } else {
+          newLink.href = window.URL.createObjectURL(textToBLOB);
+          newLink.style.display = "none";
+          document.body.appendChild(newLink);
+        }
+
+        newLink.click();
+      };
+    </script>
+  </body>
+</html>
